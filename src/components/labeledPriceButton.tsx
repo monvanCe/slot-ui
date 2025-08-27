@@ -11,9 +11,9 @@ export default function LabeledPriceButton({
 }: ILabeledPriceButton) {
   return (
     <div
-      className={`relative h-full w-40 border-2 border-white pl-4 pb-1 rounded-full flex items-center gap-1 ${
+      className={`relative h-10 w-40 border-2 border-white pl-4 pb-1 rounded-full flex items-center gap-1 ${
         onPress ? 'cursor-pointer' : ''
-      }`}
+      } ${label ? 'mt-5' : ''} ${rightIconSvgPath ? 'mr-2' : ''}`}
       onClick={onPress}
     >
       <div className="absolute bottom-9 left-5">

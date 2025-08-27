@@ -4,11 +4,7 @@ export default function IconButton({
   icon,
   onClick,
   color = 'white',
-}: {
-  icon: string;
-  onClick?: () => void;
-  color?: string;
-}) {
+}: IIconButton) {
   return (
     <div
       className={`w-full h-full cursor-pointer ${

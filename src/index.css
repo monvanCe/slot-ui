@@ -11,26 +11,6 @@
   --color-orange-rgb: 237 149 66;
 }
 
-.rounded-tab {
-  --r: 25px;
-  line-height: 1.8;
-  padding-inline: 0.5em;
-  border-inline: var(--r) solid #0000;
-  border-radius: calc(2 * var(--r)) calc(2 * var(--r)) 0 0 / var(--r);
-  mask: radial-gradient(var(--r) at var(--r) 0, #0000 98%, #000 101%)
-      calc(-1 * var(--r)) 100%/100% var(--r) repeat-x,
-    conic-gradient(#ad8686 0 0) padding-box;
-  background: rgb(var(--color-background-rgb)) border-box;
-  width: fit-content;
-}
-
-.triangle {
-  width: 180px;
-  aspect-ratio: 1 / cos(30deg);
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
-  background: linear-gradient(45deg, #fa6900, #c02942);
-}
-
 /* Poppins Font Family */
 @font-face {
   font-family: 'Poppins';

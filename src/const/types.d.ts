@@ -3,7 +3,24 @@ interface IDynamicSvgProps {
   svgFilePath: string;
 }
 
-type TLabel =
+interface ILabelArea {
+  title: string;
+  bgColor: string;
+  textColor?: string;
+}
+
+interface IIconButton {
+  icon: string;
+  onClick?: () => void;
+  color?: string;
+}
+
+interface IInfoButton {
+  onPress: () => void;
+  fillColor: string;
+}
+
+type TLabeledPriceButtonLabel =
   | {
       label: string;
       labelColor: string;
@@ -13,7 +30,7 @@ type TLabel =
       labelColor?: undefined;
     };
 
-type ILabeledPriceButton = TLabel & {
+type ILabeledPriceButton = TLabeledPriceButtonLabel & {
   onPress?: () => void;
   value?: number;
   rightIconSvgPath?: string;
