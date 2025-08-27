@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32.43 24.48">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="AutoPlay_Popup" data-name="AutoPlay Popup">
+    <path class="cls-1" d="M12.45,24.47c-.91.03-1.83-.29-2.55-.95L1.09,15.38c-1.37-1.27-1.45-3.4-.19-4.78,1.27-1.37,3.4-1.45,4.78-.19l6.5,6.01L26.58,1.07c1.28-1.36,3.42-1.43,4.78-.15,1.36,1.28,1.43,3.41.15,4.78L14.95,23.34c-.67.72-1.58,1.1-2.5,1.13ZM10.03,18.71v.02s0-.02,0-.02Z"/>
+  </g>
+</svg>
