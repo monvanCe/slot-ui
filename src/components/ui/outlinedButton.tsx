@@ -9,13 +9,13 @@ export default function OutlinedButton({
 }: IOutlinedButton) {
   return (
     <div
-      className={`relative h-full w-full bg-${outlineColor} rounded-full p-4 ${
+      className={`relative border-2 h-full w-full bg-${outlineColor} rounded-full p-[20%] ${
         onPress ? 'cursor-pointer' : ''
       }`}
       onClick={onPress}
     >
       <div
-        className={`h-full w-full bg-${bgColor} rounded-full p-3 flex items-center justify-center`}
+        className={`h-full w-full bg-${bgColor} rounded-full p-[20%] flex items-center justify-center`}
       >
         {iconSvgPath && (
           <img
@@ -29,7 +29,7 @@ export default function OutlinedButton({
         )}
       </div>
       {outlineSvgPath && (
-        <div className="absolute p-1 inset-0 w-full h-full">
+        <div className="absolute p-[5%] inset-0 w-full h-full">
           <img src={outlineSvgPath} alt="outline" className="w-full h-full" />
         </div>
       )}

@@ -20,6 +20,13 @@ interface IInfoButton {
   fillColor: string;
 }
 
+interface ISvgButton {
+  svgFilePath: string;
+  fillColor: string;
+  onPress: () => void;
+  label?: string;
+}
+
 type TLabeledPriceButtonLabel =
   | {
       label: string;
