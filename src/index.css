@@ -9,6 +9,8 @@
   --color-blue-rgb: 72 172 236;
   --color-green-rgb: 88 177 86;
   --color-orange-rgb: 237 149 66;
+
+  user-select: none;
 }
 
 /* Poppins Font Family */

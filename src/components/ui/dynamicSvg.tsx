@@ -12,13 +12,40 @@ export default function DynamicSvg({
         const response = await fetch(svgFilePath);
         let svgText = await response.text();
 
-        // .cls-1 sınıfının fill değerini değiştir
-        svgText = svgText.replace(/fill:\s*[^;]+;/g, `fill: ${fillColor};`);
-
-        // Alternatif olarak style bloğunu da güncelle
+        // Sadece cls-1 class'ına sahip elementlerin fill değerini değiştir
         svgText = svgText.replace(
-          /(<style[^>]*>[\s\S]*?)fill:\s*[^;]+;/g,
-          `$1fill: ${fillColor};`
+          /class="cls-1"[^>]*fill="[^"]*"/g,
+          `class="cls-1" fill="${fillColor}"`
+        );
+
+        // Style bloğunda cls-1 için fill değerini güncelle
+        svgText = svgText.replace(
+          /(\.cls-1\s*\{[^}]*fill:\s*)[^;]+;/g,
+          `$1${fillColor};`
+        );
+
+        // Inline style'da cls-1 için fill değerini güncelle
+        svgText = svgText.replace(
+          /(class="cls-1"[^>]*style="[^"]*fill:\s*)[^;"]+/g,
+          `$1${fillColor}`
+        );
+
+        // Sadece cls-1 class'ına sahip elementlerin fill değerini değiştir
+        svgText = svgText.replace(
+          /class="st0"[^>]*fill="[^"]*"/g,
+          `class="st0" fill="${fillColor}"`
+        );
+
+        // Style bloğunda cls-1 için fill değerini güncelle
+        svgText = svgText.replace(
+          /(\.st0\s*\{[^}]*fill:\s*)[^;]+;/g,
+          `$1${fillColor};`
+        );
+
+        // Inline style'da cls-1 için fill değerini güncelle
+        svgText = svgText.replace(
+          /(class="st0"[^>]*style="[^"]*fill:\s*)[^;"]+/g,
+          `$1${fillColor}`
         );
 
         setSvgContent(svgText);

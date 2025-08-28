@@ -7,11 +7,14 @@ export default function SvgButton({
   label,
 }: ISvgButton) {
   return (
-    <div className="relative h-full cursor-pointer" onClick={onPress}>
+    <div
+      className={`relative h-full ${!!onPress ? 'cursor-pointer' : ''}`}
+      onClick={onPress}
+    >
       <DynamicSvg svgFilePath={svgFilePath} fillColor={fillColor} />
       {label && (
         <div className="absolute inset-0 flex items-center justify-center px-4">
-          <span className="text-white font-semibold leading-none text-center">
+          <span className="text-white font-semibold leading-none text-center text-xl">
             {label}
           </span>
         </div>

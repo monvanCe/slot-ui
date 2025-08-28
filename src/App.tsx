@@ -9,10 +9,10 @@ import DesktopMiddleSection from './components/desktopMiddleSection';
 
 export default function App() {
   return (
-    <div className="bg-black relative h-screen">
-      <div className="absolute bottom-0 flex h-12 w-full border-t-2 bg-background justify-between items-end py-1 px-4">
-        <div className="h-14 w-14">
-          <InfoButton onPress={() => {}} fillColor={COLORS.blue} />
+    <div className="bg-black relative h-screen overflow-y-hidden">
+      <div className="absolute bottom-0 flex h-14 w-full border-t-2 bg-background justify-between items-end py-1 pr-8 pl-14">
+        <div className="h-20 w-20 flex-shrink-0">
+          <InfoButton fillColor={COLORS.blue} />
         </div>
         <div className="h-full aspect-square">
           <IconButton icon="material-symbols:settings-rounded" />
@@ -20,17 +20,17 @@ export default function App() {
         <div className="h-full aspect-square">
           <IconButton icon="material-symbols:volume-up-rounded" />
         </div>
-        <div className="h-full aspect-[4]">
+        <div className="h-full w-60">
           <LabeledPriceButton
             label="CREDIT"
             labelColor="orange"
             value={10000}
           />
         </div>
-        <div className="h-12 mb-[42px] w-[50%]">
+        <div className="h-14 mb-12 w-[700px]">
           <DesktopMiddleSection />
         </div>
-        <div className="h-full aspect-[4]">
+        <div className="h-full w-60">
           <LabeledPriceButton
             label="BET"
             labelColor="green"
@@ -38,17 +38,21 @@ export default function App() {
             rightIconSvgPath="svg/Bet_Icon.svg"
           />
         </div>
-        <SvgButton
-          svgFilePath="svg/Autoplay_Button_Stroke.svg"
-          fillColor={COLORS.background}
-          onPress={() => {}}
-          label="AUTO PLAY"
-        />
-        <div className="h-32 w-32">
-          <OutlinedButton
-            outlineSvgPath="svg/Spin_Button_Icon.svg"
-            label="SPIN"
-          />
+        <div className="flex flex-row h-full items-end">
+          <div className=" h-full flex-shrink-0">
+            <SvgButton
+              svgFilePath="svg/Autoplay_Button_Stroke.svg"
+              fillColor={COLORS.background}
+              label="AUTO PLAY"
+            />
+          </div>
+          <div className="h-40 w-40 flex-shrink-0">
+            <OutlinedButton
+              outlineSvgPath="svg/Spin_Button_Icon.svg"
+              label="SPIN"
+              fontSize={26}
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -7,9 +7,7 @@ export default function IconButton({
 }: IIconButton) {
   return (
     <div
-      className={`w-full h-full cursor-pointer ${
-        onClick ? 'cursor-pointer' : ''
-      }`}
+      className={`w-full h-full ${onClick ? 'cursor-pointer' : ''}`}
       onClick={onClick}
     >
       <Icon icon={icon} className={`text-${color} w-full h-full`} />

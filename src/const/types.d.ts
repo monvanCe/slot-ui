@@ -1,6 +1,7 @@
 interface IDynamicSvgProps {
   fillColor: string;
   svgFilePath: string;
+  class?: string;
 }
 
 interface ILabelArea {
@@ -16,14 +17,14 @@ interface IIconButton {
 }
 
 interface IInfoButton {
-  onPress: () => void;
+  onPress?: () => void;
   fillColor: string;
 }
 
 interface ISvgButton {
   svgFilePath: string;
   fillColor: string;
-  onPress: () => void;
+  onPress?: () => void;
   label?: string;
 }
 
@@ -59,4 +60,5 @@ type IOutlinedButton = TOutlinedButtonSpan & {
   bgColor?: string;
   color?: string;
   outlineSvgPath?: string;
+  fontSize?: number;
 };

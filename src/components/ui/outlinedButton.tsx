@@ -6,6 +6,7 @@ export default function OutlinedButton({
   iconSvgPath,
   outlineSvgPath,
   label,
+  fontSize,
 }: IOutlinedButton) {
   return (
     <div
@@ -25,7 +26,12 @@ export default function OutlinedButton({
           />
         )}
         {label && (
-          <span className={`text-${color} font-semibold`}>{label}</span>
+          <span
+            className={`text-${color} font-semibold`}
+            style={{ fontSize: `${fontSize}px` }}
+          >
+            {label}
+          </span>
         )}
       </div>
       {outlineSvgPath && (
