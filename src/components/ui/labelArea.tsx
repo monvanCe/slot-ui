@@ -10,7 +10,7 @@ export default function LabelArea({ title, bgColor, textColor }: ILabelArea) {
           textColor ? `text-${textColor}` : 'text-white'
         }`}
       >
-        <AdaptiveText>{title}</AdaptiveText>
+        <AdaptiveText justify="start">{title}</AdaptiveText>
       </div>
     </div>
   );

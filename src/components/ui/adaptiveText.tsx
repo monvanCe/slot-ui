@@ -11,6 +11,8 @@ interface AdaptiveTextProps {
   className?: string;
   minFontSize?: number;
   maxFontSize?: number;
+  justify?: 'start' | 'center' | 'end';
+  align?: 'start' | 'center' | 'end';
 }
 
 const AdaptiveText: React.FC<AdaptiveTextProps> = ({
@@ -18,12 +20,37 @@ const AdaptiveText: React.FC<AdaptiveTextProps> = ({
   className = '',
   minFontSize = 8,
   maxFontSize = 100,
+  justify = 'center',
+  align = 'center',
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const [fontSize, setFontSize] = useState(maxFontSize);
   const resizeTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
   const lastFontSizeRef = useRef<number>(fontSize);
+
+  // Justify ve align class'larını hesapla
+  const getJustifyClass = () => {
+    switch (justify) {
+      case 'start':
+        return 'justify-start';
+      case 'end':
+        return 'justify-end';
+      default:
+        return 'justify-center';
+    }
+  };
+
+  const getAlignClass = () => {
+    switch (align) {
+      case 'start':
+        return 'items-start';
+      case 'end':
+        return 'items-end';
+      default:
+        return 'items-center';
+    }
+  };
 
   const adjustFontSize = useCallback(() => {
     if (!containerRef.current || !textRef.current) return;
@@ -113,7 +140,7 @@ const AdaptiveText: React.FC<AdaptiveTextProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`h-full w-full flex items-center justify-center overflow-hidden ${className}`}
+      className={`h-full w-full flex ${getAlignClass()} ${getJustifyClass()} overflow-hidden ${className}`}
     >
       <div
         ref={textRef}
