@@ -10,7 +10,7 @@ import DesktopMiddleSection from './components/desktopMiddleSection';
 export default function App() {
   return (
     <div className="bg-black relative h-screen overflow-y-hidden">
-      <div className="absolute bottom-0 flex h-14 w-full border-t-2 bg-background justify-between items-end py-1 pr-8 pl-14">
+      <div className="absolute bottom-0 flex h-14 w-full border-t-2 bg-background justify-between items-end py-1 pl-12 pr-8">
         <div className="h-20 w-20 flex-shrink-0">
           <InfoButton fillColor={COLORS.blue} />
         </div>
@@ -20,17 +20,17 @@ export default function App() {
         <div className="h-full aspect-square">
           <IconButton icon="material-symbols:volume-up-rounded" />
         </div>
-        <div className="h-full w-60">
+        <div className="h-full w-56">
           <LabeledPriceButton
             label="CREDIT"
             labelColor="orange"
             value={10000}
           />
         </div>
-        <div className="h-14 mb-12 w-[700px]">
+        <div className="h-14 mb-12 w-[650px]">
           <DesktopMiddleSection />
         </div>
-        <div className="h-full w-60">
+        <div className="h-full w-56">
           <LabeledPriceButton
             label="BET"
             labelColor="green"

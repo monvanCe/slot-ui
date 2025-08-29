@@ -1,0 +1,123 @@
+import React, { useRef, useEffect, useState, useCallback } from 'react';
+
+interface AdaptiveTextProps {
+  text: string;
+  className?: string;
+  minFontSize?: number;
+  maxFontSize?: number;
+}
+
+const AdaptiveText: React.FC<AdaptiveTextProps> = ({
+  text,
+  className = '',
+  minFontSize = 8,
+  maxFontSize = 100,
+}) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLSpanElement>(null);
+  const [fontSize, setFontSize] = useState(maxFontSize);
+  const resizeTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
+  const lastFontSizeRef = useRef<number>(fontSize);
+
+  const adjustFontSize = useCallback(() => {
+    if (!containerRef.current || !textRef.current) return;
+
+    const container = containerRef.current;
+    const textElement = textRef.current;
+
+    // Container boyutlarını al
+    const containerWidth = container.clientWidth;
+    const containerHeight = container.clientHeight;
+
+    // Eğer container boyutu 0 ise işlemi durdur
+    if (containerWidth === 0 || containerHeight === 0) return;
+
+    // Başlangıç font boyutu
+    let currentFontSize = maxFontSize;
+
+    // Font boyutunu azaltarak yazının sığıp sığmadığını kontrol et
+    while (currentFontSize > minFontSize) {
+      textElement.style.fontSize = `${currentFontSize}px`;
+
+      // Yazının boyutlarını kontrol et
+      const textWidth = textElement.scrollWidth;
+      const textHeight = textElement.scrollHeight;
+
+      // Eğer yazı container'a sığıyorsa döngüyü kır
+      if (textWidth <= containerWidth && textHeight <= containerHeight) {
+        break;
+      }
+
+      currentFontSize -= 1;
+    }
+
+    // Font boyutu değiştiyse state'i güncelle
+    if (currentFontSize !== lastFontSizeRef.current) {
+      lastFontSizeRef.current = currentFontSize;
+      setFontSize(currentFontSize);
+    }
+  }, [text, minFontSize, maxFontSize]);
+
+  useEffect(() => {
+    // Debounced resize handler
+    const handleResize = () => {
+      if (resizeTimeoutRef.current) {
+        clearTimeout(resizeTimeoutRef.current);
+      }
+
+      resizeTimeoutRef.current = setTimeout(() => {
+        adjustFontSize();
+      }, 100);
+    };
+
+    // İlk ayarlama
+    const initialTimeout = setTimeout(() => {
+      adjustFontSize();
+    }, 0);
+
+    // ResizeObserver ekle
+    let resizeObserver: ResizeObserver | null = null;
+
+    if (window.ResizeObserver && containerRef.current) {
+      resizeObserver = new ResizeObserver(handleResize);
+      resizeObserver.observe(containerRef.current);
+    }
+
+    // Cleanup
+    return () => {
+      clearTimeout(initialTimeout);
+      if (resizeTimeoutRef.current) {
+        clearTimeout(resizeTimeoutRef.current);
+      }
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
+    };
+  }, [adjustFontSize]);
+
+  // Text değiştiğinde font boyutunu yeniden ayarla
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      adjustFontSize();
+    }, 0);
+
+    return () => clearTimeout(timeout);
+  }, [text, adjustFontSize]);
+
+  return (
+    <div
+      ref={containerRef}
+      className={`h-full w-full flex items-center justify-center overflow-hidden ${className}`}
+    >
+      <span
+        ref={textRef}
+        style={{ fontSize: `${fontSize}px` }}
+        className="whitespace-nowrap leading-none"
+      >
+        {text}
+      </span>
+    </div>
+  );
+};
+
+export default AdaptiveText;
