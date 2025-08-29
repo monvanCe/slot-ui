@@ -1,20 +1,26 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, {
+  useRef,
+  useEffect,
+  useState,
+  useCallback,
+  ReactNode,
+} from 'react';
 
 interface AdaptiveTextProps {
-  text: string;
+  children: ReactNode;
   className?: string;
   minFontSize?: number;
   maxFontSize?: number;
 }
 
 const AdaptiveText: React.FC<AdaptiveTextProps> = ({
-  text,
+  children,
   className = '',
   minFontSize = 8,
   maxFontSize = 100,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLSpanElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
   const [fontSize, setFontSize] = useState(maxFontSize);
   const resizeTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
   const lastFontSizeRef = useRef<number>(fontSize);
@@ -56,7 +62,7 @@ const AdaptiveText: React.FC<AdaptiveTextProps> = ({
       lastFontSizeRef.current = currentFontSize;
       setFontSize(currentFontSize);
     }
-  }, [text, minFontSize, maxFontSize]);
+  }, [children, minFontSize, maxFontSize]);
 
   useEffect(() => {
     // Debounced resize handler
@@ -95,27 +101,27 @@ const AdaptiveText: React.FC<AdaptiveTextProps> = ({
     };
   }, [adjustFontSize]);
 
-  // Text değiştiğinde font boyutunu yeniden ayarla
+  // Children değiştiğinde font boyutunu yeniden ayarla
   useEffect(() => {
     const timeout = setTimeout(() => {
       adjustFontSize();
     }, 0);
 
     return () => clearTimeout(timeout);
-  }, [text, adjustFontSize]);
+  }, [children, adjustFontSize]);
 
   return (
     <div
       ref={containerRef}
       className={`h-full w-full flex items-center justify-center overflow-hidden ${className}`}
     >
-      <span
+      <div
         ref={textRef}
         style={{ fontSize: `${fontSize}px` }}
-        className="whitespace-nowrap leading-none"
+        className="whitespace-nowrap leading-none flex items-center"
       >
-        {text}
-      </span>
+        {children}
+      </div>
     </div>
   );
 };

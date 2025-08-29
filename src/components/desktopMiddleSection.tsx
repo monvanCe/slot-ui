@@ -14,12 +14,16 @@ export default function DesktopMiddleSection() {
 
       <div className="h-[55.35px] -top-px absolute left-[88px] right-[88px] bg-background border-t-2 2xl:pt-4 xl:pt-8 pt-5 z-10">
         <div className="flex flex-col text-white  items-center justify-center font-semibold leading-none tracking-tighter 2xl:text-[38px] xl:text-[26px] text-[24px] ">
-          <div className="flex items-center justify-center">
-            <AdaptiveText text="WIN" className="text-green" />
-            <AdaptiveText text="$5.000.00" />
+          <div className="w-full h-12">
+            <AdaptiveText>
+              <span className="text-white">
+                <span className="text-green">WIN</span> $5.000.000.000.00
+              </span>
+            </AdaptiveText>
           </div>
+
           <span className="text-center w-full h-12">
-            <AdaptiveText text="HOLD SPACE FOR TURBO SPIN" />
+            <AdaptiveText>HOLD SPACE FOR TURBO SPIN</AdaptiveText>
           </span>
         </div>
       </div>
