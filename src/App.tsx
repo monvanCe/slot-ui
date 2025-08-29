@@ -6,6 +6,7 @@ import IconButton from './components/ui/iconButton';
 import { COLORS } from './utils/colors';
 import SvgButton from './components/ui/svgButton';
 import DesktopMiddleSection from './components/desktopMiddleSection';
+import AdaptiveText from './components/ui/adaptiveText';
 
 export default function App() {
   return (
@@ -34,7 +35,7 @@ export default function App() {
           <LabeledPriceButton
             label="BET"
             labelColor="green"
-            value={10000}
+            value={100000000000}
             rightIconSvgPath="svg/Bet_Icon.svg"
           />
         </div>
@@ -43,14 +44,18 @@ export default function App() {
             <SvgButton
               svgFilePath="svg/Autoplay_Button_Stroke.svg"
               fillColor={COLORS.background}
-              label="AUTO PLAY"
-            />
+            >
+              <AdaptiveText>
+                <span className="text-white font-semibold leading-none text-center text-xl">
+                  AUTO <br /> PLAY
+                </span>
+              </AdaptiveText>
+            </SvgButton>
           </div>
           <div className="h-40 w-40 flex-shrink-0">
             <OutlinedButton
               outlineSvgPath="svg/Spin_Button_Icon.svg"
               label="SPIN"
-              fontSize={26}
             />
           </div>
         </div>

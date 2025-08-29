@@ -1,3 +1,5 @@
+import AdaptiveText from './adaptiveText';
+
 export default function OutlinedButton({
   onPress,
   outlineColor = 'background',
@@ -6,7 +8,6 @@ export default function OutlinedButton({
   iconSvgPath,
   outlineSvgPath,
   label,
-  fontSize,
 }: IOutlinedButton) {
   return (
     <div
@@ -16,22 +17,23 @@ export default function OutlinedButton({
       onClick={onPress}
     >
       <div
-        className={`h-full w-full bg-${bgColor} rounded-full p-[20%] flex items-center justify-center`}
+        className={`h-full w-full bg-${bgColor} rounded-full flex items-center justify-center`}
       >
         {iconSvgPath && (
-          <img
-            src={iconSvgPath}
-            alt="change-bet"
-            className={`text-${color} w-full h-full`}
-          />
+          <div className="h-full w-full p-[20%]">
+            <img
+              src={iconSvgPath}
+              alt="change-bet"
+              className={`text-${color} w-full h-full`}
+            />
+          </div>
         )}
         {label && (
-          <span
-            className={`text-${color} font-semibold`}
-            style={{ fontSize: `${fontSize}px` }}
-          >
-            {label}
-          </span>
+          <div className="h-full w-full p-2">
+            <AdaptiveText className={`text-${color} font-semibold`}>
+              {label}
+            </AdaptiveText>
+          </div>
         )}
       </div>
       {outlineSvgPath && (

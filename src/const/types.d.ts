@@ -25,7 +25,7 @@ interface ISvgButton {
   svgFilePath: string;
   fillColor: string;
   onPress?: () => void;
-  label?: string;
+  children?: React.ReactNode;
 }
 
 type TLabeledPriceButtonLabel =
@@ -60,5 +60,4 @@ type IOutlinedButton = TOutlinedButtonSpan & {
   bgColor?: string;
   color?: string;
   outlineSvgPath?: string;
-  fontSize?: number;
 };

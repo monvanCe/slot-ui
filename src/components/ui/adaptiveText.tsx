@@ -89,6 +89,7 @@ const AdaptiveText: React.FC<AdaptiveTextProps> = ({
       lastFontSizeRef.current = currentFontSize;
       setFontSize(currentFontSize);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [children, minFontSize, maxFontSize]);
 
   useEffect(() => {

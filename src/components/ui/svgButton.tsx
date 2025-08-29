@@ -4,7 +4,7 @@ export default function SvgButton({
   svgFilePath,
   fillColor,
   onPress,
-  label,
+  children,
 }: ISvgButton) {
   return (
     <div
@@ -12,13 +12,7 @@ export default function SvgButton({
       onClick={onPress}
     >
       <DynamicSvg svgFilePath={svgFilePath} fillColor={fillColor} />
-      {label && (
-        <div className="absolute inset-0 flex items-center justify-center px-4">
-          <span className="text-white font-semibold leading-none text-center text-xl">
-            {label}
-          </span>
-        </div>
-      )}
+      <div className="absolute inset-0">{children}</div>
     </div>
   );
 }
