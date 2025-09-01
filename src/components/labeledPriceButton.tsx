@@ -21,13 +21,13 @@ export default function LabeledPriceButton({
       <div className="absolute bottom-[100%] left-[15%]">
         {label && <LabelArea title={label} bgColor={labelColor} />}
       </div>
-      <div className="font-semibold w-full h-8">
+      <div className="font-bold w-full h-8">
         <AdaptiveText className="text-white" justify="start">
           ${value.toLocaleString()}
         </AdaptiveText>
       </div>
       {rightIconSvgPath && (
-        <div className="absolute p-1 h-[60%] aspect-square -right-2 top-1/2 -translate-y-1/2 bg-white rounded-full flex items-center justify-center">
+        <div className="absolute p-1 h-[75%] aspect-square -right-4 top-1/2 -translate-y-1/2 bg-white rounded-full flex items-center justify-center">
           <DynamicSvg
             fillColor={COLORS.background}
             svgFilePath={rightIconSvgPath}
