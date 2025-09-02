@@ -61,3 +61,15 @@ type IOutlinedButton = TOutlinedButtonSpan & {
   color?: string;
   outlineSvgPath?: string;
 };
+
+interface IUIConfig {
+  bottomBar: React.CSSProperties;
+  infoButton: React.CSSProperties;
+  settingsButton: React.CSSProperties;
+  volumeButton: React.CSSProperties;
+  creditButton: React.CSSProperties;
+  middleSection: React.CSSProperties;
+  betButton: React.CSSProperties;
+  autoplayButton: React.CSSProperties;
+  spinButton: React.CSSProperties;
+}

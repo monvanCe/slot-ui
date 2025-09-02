@@ -13,11 +13,7 @@ export const useWindowScale = () => {
       // Sadece genişliğe göre scale hesapla
       const newScale = windowWidth / referenceWidth;
 
-      // Minimum scale değeri (çok küçülmesin)
-      const minScale = 0.3;
-      const finalScale = Math.max(newScale, minScale);
-
-      setScale(finalScale);
+      setScale(newScale);
     };
 
     // İlk hesaplama
