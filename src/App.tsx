@@ -20,11 +20,28 @@ export default function App() {
         transform: `scale(${scale})`,
         transformOrigin: 'bottom left',
         position: 'relative',
-        height: '100vh',
         width: 1864,
+        marginTop: '100vh',
       }}
     >
-      <img src="/svg/Bottom_Bar.svg" alt="bottom" style={uiConfig.bottomBar} />
+      <img src="/svg/Bottom_Bar.svg" alt="bottom" style={uiConfig.curvedBar} />
+
+      <div style={uiConfig.mobileBottom} />
+      <div style={uiConfig.mobileBetButton}>
+        <OutlinedButton
+          iconSvgPath="svg/Bet_Icon.svg"
+          iconSvgFillColor="white"
+        />
+      </div>
+
+      <div style={uiConfig.mobileAutoplayButton}>
+        <OutlinedButton
+          iconSvgPath="svg/Popup_Arrow.svg"
+          iconSvgFillColor={COLORS.background}
+          iconSvgClassName="cls-2"
+          bgColor="orange"
+        />
+      </div>
 
       <div style={uiConfig.infoButton}>
         <InfoButton fillColor={COLORS.blue} />
@@ -46,12 +63,7 @@ export default function App() {
         <DesktopMiddleSection />
       </div>
       <div style={uiConfig.betButton}>
-        <LabeledPriceButton
-          label="BET"
-          labelColor="green"
-          value={100000000000}
-          rightIconSvgPath="svg/Bet_Icon.svg"
-        />
+        <LabeledPriceButton label="BET" labelColor="green" value={10000} />
       </div>
       <div style={uiConfig.autoplayButton}>
         <SvgButton
@@ -68,6 +80,7 @@ export default function App() {
       <div style={uiConfig.spinButton}>
         <OutlinedButton
           outlineSvgPath="svg/Spin_Button_Icon.svg"
+          outlineSvgFillColor="white"
           label="SPIN"
         />
       </div>

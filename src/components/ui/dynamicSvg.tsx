@@ -3,8 +3,25 @@ import { useEffect, useState } from 'react';
 export default function DynamicSvg({
   fillColor,
   svgFilePath,
+  className,
 }: IDynamicSvgProps) {
   const [svgContent, setSvgContent] = useState<string>('');
+
+  const regexByClassName = (className: string | undefined) => {
+    switch (className) {
+      case 'cls-1':
+        return /(\.cls-1\s*\{[^}]*fill:\s*)[^;]+;/g;
+
+      case 'st0':
+        return /(\.st0\s*\{[^}]*fill:\s*)[^;]+;/g;
+
+      case 'cls-2':
+        return /(\.cls-2\s*\{[^}]*fill:\s*)[^;]+;/g;
+
+      default:
+        return /(\.cls-1\s*\{[^}]*fill:\s*)[^;]+;/g;
+    }
+  };
 
   useEffect(() => {
     const loadSvg = async () => {
@@ -12,40 +29,9 @@ export default function DynamicSvg({
         const response = await fetch(svgFilePath);
         let svgText = await response.text();
 
-        // Sadece cls-1 class'ına sahip elementlerin fill değerini değiştir
         svgText = svgText.replace(
-          /class="cls-1"[^>]*fill="[^"]*"/g,
-          `class="cls-1" fill="${fillColor}"`
-        );
-
-        // Style bloğunda cls-1 için fill değerini güncelle
-        svgText = svgText.replace(
-          /(\.cls-1\s*\{[^}]*fill:\s*)[^;]+;/g,
+          regexByClassName(className),
           `$1${fillColor};`
-        );
-
-        // Inline style'da cls-1 için fill değerini güncelle
-        svgText = svgText.replace(
-          /(class="cls-1"[^>]*style="[^"]*fill:\s*)[^;"]+/g,
-          `$1${fillColor}`
-        );
-
-        // Sadece cls-1 class'ına sahip elementlerin fill değerini değiştir
-        svgText = svgText.replace(
-          /class="st0"[^>]*fill="[^"]*"/g,
-          `class="st0" fill="${fillColor}"`
-        );
-
-        // Style bloğunda cls-1 için fill değerini güncelle
-        svgText = svgText.replace(
-          /(\.st0\s*\{[^}]*fill:\s*)[^;]+;/g,
-          `$1${fillColor};`
-        );
-
-        // Inline style'da cls-1 için fill değerini güncelle
-        svgText = svgText.replace(
-          /(class="st0"[^>]*style="[^"]*fill:\s*)[^;"]+/g,
-          `$1${fillColor}`
         );
 
         setSvgContent(svgText);

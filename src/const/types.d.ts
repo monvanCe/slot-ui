@@ -1,7 +1,9 @@
+type TColors = 'background' | 'blue' | 'green' | 'orange' | 'white' | 'black';
+
 interface IDynamicSvgProps {
   fillColor: string;
   svgFilePath: string;
-  class?: string;
+  className?: string;
 }
 
 interface ILabelArea {
@@ -48,22 +50,38 @@ type TOutlinedButtonSpan =
   | {
       label: string;
       iconSvgPath?: undefined;
+      iconSvgFillColor?: undefined;
+      iconSvgClassName?: undefined;
     }
   | {
       label?: undefined;
       iconSvgPath: string;
+      iconSvgFillColor: string;
+      iconSvgClassName?: string;
     };
 
-type IOutlinedButton = TOutlinedButtonSpan & {
-  onPress?: () => void;
-  outlineColor?: string;
-  bgColor?: string;
-  color?: string;
-  outlineSvgPath?: string;
-};
+type TOutlinedButtonOutline =
+  | {
+      outlineSvgPath?: undefined;
+      outlineSvgFillColor?: undefined;
+      outlineSvgClassName?: undefined;
+    }
+  | {
+      outlineSvgPath: string;
+      outlineSvgFillColor: string;
+      outlineSvgClassName?: string;
+    };
+
+type IOutlinedButton = TOutlinedButtonSpan &
+  TOutlinedButtonOutline & {
+    onPress?: () => void;
+    outlineColor?: TColors;
+    bgColor?: TColors;
+    color?: TColors;
+  };
 
 interface IUIConfig {
-  bottomBar: React.CSSProperties;
+  curvedBar: React.CSSProperties;
   infoButton: React.CSSProperties;
   settingsButton: React.CSSProperties;
   volumeButton: React.CSSProperties;
@@ -72,4 +90,7 @@ interface IUIConfig {
   betButton: React.CSSProperties;
   autoplayButton: React.CSSProperties;
   spinButton: React.CSSProperties;
+  mobileBottom: React.CSSProperties;
+  mobileBetButton: React.CSSProperties;
+  mobileAutoplayButton: React.CSSProperties;
 }

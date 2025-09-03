@@ -1,10 +1,21 @@
-export const uiConfig: { desktop: IUIConfig } = {
+import { COLORS } from '../utils/colors';
+
+export const uiConfig: { desktop: IUIConfig; mobile: IUIConfig } = {
   desktop: {
-    bottomBar: {
+    curvedBar: {
       position: 'absolute',
       bottom: 0,
       display: 'block',
       width: 1864,
+    },
+    mobileBottom: {
+      display: 'none',
+    },
+    mobileBetButton: {
+      display: 'none',
+    },
+    mobileAutoplayButton: {
+      display: 'none',
     },
     infoButton: {
       position: 'absolute',
@@ -52,7 +63,6 @@ export const uiConfig: { desktop: IUIConfig } = {
       bottom: 8,
       left: 1280,
       display: 'block',
-
       width: 224,
       height: 48,
     },
@@ -71,6 +81,110 @@ export const uiConfig: { desktop: IUIConfig } = {
       display: 'block',
       height: 160,
       width: 160,
+    },
+  },
+  mobile: {
+    curvedBar: {
+      position: 'absolute',
+      bottom: 1780,
+      display: 'block',
+      width: 1864,
+      transform: 'rotate(180deg)',
+      scale: 2,
+    },
+    mobileBottom: {
+      position: 'absolute',
+      bottom: 0,
+      display: 'block',
+      width: 1864,
+      height: 350,
+      backgroundColor: COLORS.background,
+    },
+    mobileBetButton: {
+      position: 'absolute',
+      bottom: 990,
+      left: 260,
+      display: 'block',
+      width: 95,
+      height: 95,
+      scale: 3,
+    },
+    mobileAutoplayButton: {
+      position: 'absolute',
+      bottom: 620,
+      left: 260,
+      display: 'block',
+      width: 95,
+      height: 95,
+      scale: 3,
+    },
+    infoButton: {
+      position: 'absolute',
+      bottom: 150,
+      right: 60,
+      display: 'block',
+      width: 80,
+      height: 80,
+      scale: 2.2,
+      transformOrigin: 'bottom right',
+    },
+    settingsButton: {
+      position: 'absolute',
+      bottom: 140,
+      left: 32,
+      display: 'block',
+      width: 48,
+      height: 48,
+      scale: 4,
+      transformOrigin: 'bottom left',
+    },
+    volumeButton: {
+      display: 'none',
+    },
+    creditButton: {
+      position: 'absolute',
+      bottom: 220,
+      left: 440,
+      display: 'block',
+      width: 215,
+      height: 48,
+      scale: 3,
+    },
+    middleSection: {
+      position: 'absolute',
+      bottom: 1800,
+      left: 610,
+      display: 'block',
+      width: 650,
+      height: 56,
+      marginBottom: 48,
+      scale: 1.8,
+    },
+    betButton: {
+      position: 'absolute',
+      bottom: 220,
+      right: 500,
+      display: 'block',
+      width: 215,
+      height: 48,
+      scale: 3,
+    },
+    autoplayButton: {
+      position: 'absolute',
+      bottom: 8,
+      left: 1530,
+      display: 'none',
+      height: 48,
+      width: 128,
+    },
+    spinButton: {
+      position: 'absolute',
+      bottom: 800,
+      left: 800,
+      display: 'block',
+      height: 160,
+      width: 160,
+      scale: 3,
     },
   },
 };

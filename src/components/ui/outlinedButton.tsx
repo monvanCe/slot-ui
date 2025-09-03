@@ -1,13 +1,18 @@
 import AdaptiveText from './adaptiveText';
+import DynamicSvg from './dynamicSvg';
 
 export default function OutlinedButton({
   onPress,
   outlineColor = 'background',
   bgColor = 'green',
   color = 'white',
-  iconSvgPath,
-  outlineSvgPath,
   label,
+  iconSvgPath,
+  iconSvgFillColor,
+  iconSvgClassName,
+  outlineSvgPath,
+  outlineSvgFillColor,
+  outlineSvgClassName,
 }: IOutlinedButton) {
   return (
     <div
@@ -21,10 +26,10 @@ export default function OutlinedButton({
       >
         {iconSvgPath && (
           <div className="h-full w-full p-[20%]">
-            <img
-              src={iconSvgPath}
-              alt="change-bet"
-              className={`text-${color} w-full h-full`}
+            <DynamicSvg
+              svgFilePath={iconSvgPath}
+              fillColor={iconSvgFillColor}
+              className={iconSvgClassName}
             />
           </div>
         )}
@@ -38,7 +43,11 @@ export default function OutlinedButton({
       </div>
       {outlineSvgPath && (
         <div className="absolute p-[5%] inset-0 w-full h-full">
-          <img src={outlineSvgPath} alt="outline" className="w-full h-full" />
+          <DynamicSvg
+            svgFilePath={outlineSvgPath}
+            fillColor={outlineSvgFillColor}
+            className={outlineSvgClassName}
+          />
         </div>
       )}
     </div>
