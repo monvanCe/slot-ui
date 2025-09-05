@@ -10,9 +10,11 @@ export default function Slider({
   className = '',
 }: ISlider) {
   const [isDragging, setIsDragging] = useState(false);
+  const [shouldAnimate, setShouldAnimate] = useState(true);
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const percentage = ((value - min) / (max - min)) * 100;
+
   const updateValue = useCallback(
     (e: MouseEvent | React.MouseEvent) => {
       if (!sliderRef.current) return;
@@ -29,33 +31,54 @@ export default function Slider({
 
   const handleMouseDown = useCallback(
     (e: React.MouseEvent) => {
+      e.preventDefault();
       setIsDragging(true);
+      setShouldAnimate(false); // Disable animation during drag
       updateValue(e);
     },
     [updateValue]
   );
 
-  const handleMouseMove = useCallback(
-    (e: MouseEvent) => {
-      if (!isDragging) return;
+  const handleTrackClick = useCallback(
+    (e: React.MouseEvent) => {
+      if (isDragging) return;
+      setShouldAnimate(true); // Enable animation for click-to-position
       updateValue(e);
     },
     [isDragging, updateValue]
   );
 
-  const handleMouseUp = useCallback(() => {
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      updateValue(e);
+    },
+    [isDragging, updateValue]
+  );
+
+  const handleMouseUp = useCallback((e: MouseEvent) => {
+    e.preventDefault();
     setIsDragging(false);
-  }, [setIsDragging]);
+    setShouldAnimate(true); // Re-enable animation after drag ends
+  }, []);
 
   useEffect(() => {
     if (isDragging) {
       document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
+      document.body.style.userSelect = 'none';
+      document.body.style.cursor = 'grabbing';
+    } else {
+      document.body.style.userSelect = '';
+      document.body.style.cursor = '';
     }
 
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
+      document.body.style.userSelect = '';
+      document.body.style.cursor = '';
     };
   }, [isDragging, handleMouseMove, handleMouseUp]);
 
@@ -65,7 +88,7 @@ export default function Slider({
       <div
         ref={sliderRef}
         className="relative w-full h-1 cursor-pointer"
-        onMouseDown={handleMouseDown}
+        onClick={handleTrackClick}
       >
         {/* Background Track */}
         <div
@@ -75,22 +98,28 @@ export default function Slider({
 
         {/* Active Track */}
         <div
-          className="absolute top-0 left-0 h-full rounded-full transition-all duration-150"
+          className={`absolute top-0 left-0 h-full rounded-full ${
+            shouldAnimate ? 'transition-all duration-150' : ''
+          }`}
           style={{ width: `${percentage}%`, backgroundColor: COLORS.green }}
         />
 
         {/* Slider Handle */}
         <div
-          className="absolute p-1.5 top-1/2 transform -translate-y-1/2 w-8 h-8 rounded-full cursor-pointer shadow-lg transition-all duration-150 hover:scale-110 flex items-center justify-center"
+          className={`absolute p-1.5 top-1/2 transform -translate-y-1/2 w-8 h-8 rounded-full shadow-lg ${
+            shouldAnimate ? 'transition-all duration-150' : ''
+          } hover:scale-110 flex items-center justify-center select-none`}
           style={{
             left: `calc(${percentage}% - 12px)`,
             backgroundColor: COLORS.green,
+            cursor: isDragging ? 'grabbing' : 'grab',
           }}
+          onMouseDown={handleMouseDown}
         >
           <DynamicSvg
             fillColor="#ffffff"
             svgFilePath="/svg/Slider_Icon.svg"
-            className="w-3 h-4"
+            className="w-3 h-4 pointer-events-none"
           />
         </div>
       </div>
