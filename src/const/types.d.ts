@@ -94,3 +94,30 @@ interface IUIConfig {
   mobileBetButton: React.CSSProperties;
   mobileAutoplayButton: React.CSSProperties;
 }
+
+interface IModal {
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+  title?: string;
+}
+
+interface ISlider {
+  value: number;
+  min?: number;
+  max?: number;
+  onChange: (value: number) => void;
+  className?: string;
+}
+
+interface IChoiceOption {
+  id: string;
+  label: string;
+}
+
+interface IChoice {
+  options: IChoiceOption[];
+  selectedId: string;
+  onChange: (selectedId: string) => void;
+  className?: string;
+}
