@@ -17,6 +17,7 @@ export const uiConfig: { desktop: IUIConfig; mobile: IUIConfig } = {
     mobileAutoplayButton: {
       display: 'none',
     },
+
     infoButton: {
       position: 'absolute',
       bottom: 8,
@@ -121,17 +122,17 @@ export const uiConfig: { desktop: IUIConfig; mobile: IUIConfig } = {
     infoButton: {
       position: 'absolute',
       bottom: 150,
-      right: 60,
+      left: 1640,
       display: 'block',
       width: 80,
       height: 80,
       scale: 2.2,
-      transformOrigin: 'bottom right',
+      transformOrigin: 'bottom left',
     },
     settingsButton: {
       position: 'absolute',
       bottom: 140,
-      left: 32,
+      left: 38,
       display: 'block',
       width: 48,
       height: 48,
@@ -143,11 +144,11 @@ export const uiConfig: { desktop: IUIConfig; mobile: IUIConfig } = {
     },
     creditButton: {
       position: 'absolute',
-      bottom: 220,
-      left: 440,
+      bottom: 210,
+      left: 460,
       display: 'block',
       width: 215,
-      height: 48,
+      height: 52,
       scale: 3,
     },
     middleSection: {
@@ -162,11 +163,11 @@ export const uiConfig: { desktop: IUIConfig; mobile: IUIConfig } = {
     },
     betButton: {
       position: 'absolute',
-      bottom: 220,
-      right: 500,
+      bottom: 210,
+      left: 1180,
       display: 'block',
       width: 215,
-      height: 48,
+      height: 52,
       scale: 3,
     },
     autoplayButton: {

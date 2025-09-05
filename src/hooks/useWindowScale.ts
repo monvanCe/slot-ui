@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { REFERENCE_WIDTH } from '../const/staticVariables';
 
 export const useWindowScale = () => {
   const [scale, setScale] = useState(1);
@@ -7,10 +8,8 @@ export const useWindowScale = () => {
     const calculateScale = () => {
       const windowWidth = window.innerWidth;
 
-      // Referans genişlik (tam ekran için ideal boyut)
-      const referenceWidth = 1864;
+      const referenceWidth = REFERENCE_WIDTH;
 
-      // Sadece genişliğe göre scale hesapla
       const newScale = windowWidth / referenceWidth;
 
       setScale(newScale);

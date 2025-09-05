@@ -9,10 +9,23 @@ import DesktopMiddleSection from './components/desktopMiddleSection';
 import AdaptiveText from './components/ui/adaptiveText';
 import { useWindowScale } from './hooks/useWindowScale';
 import { useAppSelector } from './store/store';
+import { useEffect } from 'react';
+import { calculatePixelPosition } from './utils/calculatePixelPosition';
 
 export default function App() {
   const scale = useWindowScale();
   const uiConfig = useAppSelector((state) => state.uiConfig);
+
+  useEffect(() => {
+    const curvedBarStyle = uiConfig.curvedBar;
+    const { bottomByPixel } = calculatePixelPosition(curvedBarStyle);
+
+    if (bottomByPixel !== null) {
+      document
+        .getElementById('pixi-container')
+        ?.style.setProperty('bottom', `${bottomByPixel}px`);
+    }
+  }, [uiConfig]);
 
   return (
     <div
@@ -25,7 +38,6 @@ export default function App() {
       }}
     >
       <img src="/svg/Bottom_Bar.svg" alt="bottom" style={uiConfig.curvedBar} />
-
       <div style={uiConfig.mobileBottom} />
       <div style={uiConfig.mobileBetButton}>
         <OutlinedButton
@@ -33,7 +45,6 @@ export default function App() {
           iconSvgFillColor="white"
         />
       </div>
-
       <div style={uiConfig.mobileAutoplayButton}>
         <OutlinedButton
           iconSvgPath="svg/Popup_Arrow.svg"
@@ -42,7 +53,6 @@ export default function App() {
           bgColor="orange"
         />
       </div>
-
       <div style={uiConfig.infoButton}>
         <InfoButton fillColor={COLORS.blue} />
       </div>

@@ -13,15 +13,15 @@ export default function LabeledPriceButton({
   return (
     <div
       className={`relative h-full w-full
-         border-2 border-white pl-[10%] pr-[10%] rounded-full flex items-center ${
+         border-2 border-white pl-[10%] pr-[10%] py-[2%] rounded-full flex items-center ${
            onPress ? 'cursor-pointer' : ''
          }  `}
       onClick={onPress}
     >
-      <div className="absolute bottom-[100%] left-[15%]">
+      <div className="absolute bottom-[100%] left-[15%] w-6/12">
         {label && <LabelArea title={label} bgColor={labelColor} />}
       </div>
-      <div className="font-bold w-full h-8">
+      <div className="font-bold w-full h-full">
         <AdaptiveText className="text-white" justify="start">
           ${value.toLocaleString()}
         </AdaptiveText>
