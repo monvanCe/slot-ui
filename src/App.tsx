@@ -30,6 +30,7 @@ export default function App() {
 
   useEffect(() => {
     const curvedBarStyle = uiConfig.curvedBar;
+    //eslint-disable-next-line
     const { bottomByPixel } = calculatePixelPosition(curvedBarStyle);
 
     // if (bottomByPixel !== null) {

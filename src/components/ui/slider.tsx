@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import DynamicSvg from './dynamicSvg';
 import { COLORS } from '../../utils/colors';
 
@@ -13,31 +13,39 @@ export default function Slider({
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const percentage = ((value - min) / (max - min)) * 100;
+  const updateValue = useCallback(
+    (e: MouseEvent | React.MouseEvent) => {
+      if (!sliderRef.current) return;
 
-  const handleMouseDown = (e: React.MouseEvent) => {
-    setIsDragging(true);
-    updateValue(e);
-  };
+      const rect = sliderRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+      const newValue = Math.round(min + (percentage / 100) * (max - min));
 
-  const handleMouseMove = (e: MouseEvent) => {
-    if (!isDragging) return;
-    updateValue(e);
-  };
+      onChange(newValue);
+    },
+    [min, max, onChange]
+  );
 
-  const handleMouseUp = () => {
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent) => {
+      setIsDragging(true);
+      updateValue(e);
+    },
+    [updateValue]
+  );
+
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      if (!isDragging) return;
+      updateValue(e);
+    },
+    [isDragging, updateValue]
+  );
+
+  const handleMouseUp = useCallback(() => {
     setIsDragging(false);
-  };
-
-  const updateValue = (e: MouseEvent | React.MouseEvent) => {
-    if (!sliderRef.current) return;
-
-    const rect = sliderRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
-    const newValue = Math.round(min + (percentage / 100) * (max - min));
-
-    onChange(newValue);
-  };
+  }, [setIsDragging]);
 
   useEffect(() => {
     if (isDragging) {
@@ -49,7 +57,7 @@ export default function Slider({
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [isDragging]);
+  }, [isDragging, handleMouseMove, handleMouseUp]);
 
   return (
     <div className={`relative ${className}`}>

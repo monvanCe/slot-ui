@@ -43,7 +43,7 @@ export default function DynamicSvg({
     if (svgFilePath) {
       loadSvg();
     }
-  }, [svgFilePath, fillColor]);
+  }, [svgFilePath, fillColor, className]);
 
   if (!svgContent) {
     return (

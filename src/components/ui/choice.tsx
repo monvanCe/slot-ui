@@ -32,7 +32,7 @@ export default function Choice({
           >
             {/* Choice Circle */}
             <div
-              className={`w-8 h-8 p-1 rounded-full flex items-center justify-center transition-all duration-200 ${
+              className={`w-8 aspect-square p-1 rounded-full flex items-center justify-center transition-all duration-200 ${
                 isSelected ? 'border-0' : 'border-2 border-white'
               }`}
               style={{
