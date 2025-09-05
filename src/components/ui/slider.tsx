@@ -83,13 +83,12 @@ export default function Slider({
   }, [isDragging, handleMouseMove, handleMouseUp]);
 
   return (
-    <div className={`relative ${className}`}>
+    <div
+      className={`relative ${className} h-3 py-1 cursor-pointer`}
+      onClick={handleTrackClick}
+    >
       {/* Slider Track */}
-      <div
-        ref={sliderRef}
-        className="relative w-full h-1 cursor-pointer"
-        onClick={handleTrackClick}
-      >
+      <div ref={sliderRef} className="relative w-full h-1">
         {/* Background Track */}
         <div
           className="absolute inset-0 rounded-full"
