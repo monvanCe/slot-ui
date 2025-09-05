@@ -32,11 +32,11 @@ export default function App() {
     const curvedBarStyle = uiConfig.curvedBar;
     const { bottomByPixel } = calculatePixelPosition(curvedBarStyle);
 
-    if (bottomByPixel !== null) {
-      document
-        .getElementById('pixi-container')
-        ?.style.setProperty('bottom', `${bottomByPixel}px`);
-    }
+    // if (bottomByPixel !== null) {
+    //   document
+    //     .getElementById('pixi-container')
+    //     ?.style.setProperty('bottom', `${bottomByPixel}px`);
+    // }
   }, [uiConfig]);
 
   return (
