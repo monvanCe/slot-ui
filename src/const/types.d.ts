@@ -157,3 +157,15 @@ interface IChoice {
   onChange: (selectedId: string) => void;
   className?: string;
 }
+
+type TCounterDisplayType = 'number' | 'currency';
+
+interface ICounter {
+  label?: string;
+  value: number;
+  step: number;
+  displayType: TCounterDisplayType;
+  onIncrement: (newValue: number) => void;
+  onDecrement: (newValue: number) => void;
+  className?: string;
+}

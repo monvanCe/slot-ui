@@ -21,7 +21,7 @@ const initialState: ComponentStatesState = {
   settingsButton: COMPONENT_STATES.settingsButton.default!,
   volumeButton: COMPONENT_STATES.volumeButton.default!,
   creditButton: COMPONENT_STATES.creditButton.default!,
-  betButton: COMPONENT_STATES.betButton.default!,
+  betButton: COMPONENT_STATES.betButton.pressable!,
   autoplayButton: COMPONENT_STATES.autoplayButton.default!,
 };
 

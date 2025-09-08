@@ -14,6 +14,7 @@ import { calculatePixelPosition } from './utils/calculatePixelPosition';
 import Modal from './components/ui/modal';
 import Slider from './components/ui/slider';
 import Choice from './components/ui/choice';
+import Counter from './components/ui/counter';
 import {
   setSpinButtonState,
   setAutoplayButtonState,
@@ -25,9 +26,11 @@ export default function App() {
   const dispatch = useAppDispatch();
   const componentStyles = useAppSelector((state) => state.componentStyles);
   const componentStates = useAppSelector((state) => state.componentStates);
-  const [isAutoplayModalOpen, setIsAutoplayModalOpen] = useState(false);
   const [autoplayCount, setAutoplayCount] = useState(100);
   const [selectedSpinSpeed, setSelectedSpinSpeed] = useState('skip-screens');
+  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+  const [counterValue, setCounterValue] = useState(5);
+  const [betValue, setBetValue] = useState(10000);
 
   const spinSpeedOptions = [
     { id: 'turbo-spin', label: 'TURBO SPIN' },
@@ -64,53 +67,90 @@ export default function App() {
 
   return (
     <>
-      {/* Autoplay Modal */}
+      {/* Settings Modal */}
       <Modal
-        isOpen={isAutoplayModalOpen}
-        onClose={() => setIsAutoplayModalOpen(false)}
-        title="AUTOPLAY SETTINGS"
+        isOpen={isSettingsModalOpen}
+        onClose={() => setIsSettingsModalOpen(false)}
+        title="SETTINGS"
       >
         <div className="space-y-6">
-          {/* Spin Speed Options */}
-          <div className="space-y-3">
-            <Choice
-              options={spinSpeedOptions}
-              selectedId={selectedSpinSpeed}
-              onChange={setSelectedSpinSpeed}
-            />
-          </div>
+          {/* Autoplay Settings Section */}
+          <div className="space-y-4">
+            <h2 className="text-white font-bold text-xl border-b border-gray-600 pb-2">
+              AUTOPLAY SETTINGS
+            </h2>
 
-          {/* Number of Autospins */}
-          <div className="space-y-3">
-            <h3 className="text-white font-bold text-lg">
-              NUMBER OF AUTOSPINS
-            </h3>
-            <div className="flex items-center space-x-4">
-              <div className="flex-1">
-                <Slider
-                  value={autoplayCount}
-                  min={1}
-                  max={1000}
-                  onChange={setAutoplayCount}
-                />
-              </div>
-              <div className="text-white font-bold text-2xl min-w-[60px] text-center">
-                {autoplayCount}
+            {/* Spin Speed Options */}
+            <div className="space-y-3">
+              <Choice
+                options={spinSpeedOptions}
+                selectedId={selectedSpinSpeed}
+                onChange={setSelectedSpinSpeed}
+              />
+            </div>
+
+            {/* Number of Autospins */}
+            <div className="space-y-3">
+              <h3 className="text-white font-bold text-lg">
+                NUMBER OF AUTOSPINS
+              </h3>
+              <div className="flex items-center space-x-4">
+                <div className="flex-1">
+                  <Slider
+                    value={autoplayCount}
+                    min={1}
+                    max={1000}
+                    onChange={setAutoplayCount}
+                  />
+                </div>
+                <div className="text-white font-bold text-2xl min-w-[60px] text-center">
+                  {autoplayCount}
+                </div>
               </div>
             </div>
+
+            {/* Start Autoplay Button */}
+            <button
+              onClick={() => {
+                console.log(`Starting autoplay with ${autoplayCount} spins`);
+                setIsSettingsModalOpen(false);
+              }}
+              className="w-full py-3 px-6 rounded-lg font-bold text-lg transition-all duration-200 hover:opacity-90"
+              style={{ backgroundColor: COLORS.green }}
+            >
+              START AUTOPLAY ({autoplayCount})
+            </button>
           </div>
 
-          {/* Start Button */}
-          <button
-            onClick={() => {
-              console.log(`Starting autoplay with ${autoplayCount} spins`);
-              setIsAutoplayModalOpen(false);
-            }}
-            className="w-full py-3 px-6 rounded-lg font-bold text-lg transition-all duration-200 hover:opacity-90"
-            style={{ backgroundColor: COLORS.green }}
-          >
-            START AUTOPLAY ({autoplayCount})
-          </button>
+          {/* Other Settings Section */}
+          <div className="space-y-4">
+            <h2 className="text-white font-bold text-xl border-b border-gray-600 pb-2">
+              OTHER SETTINGS
+            </h2>
+
+            {/* Counter Test - Number Type */}
+            <div className="space-y-3">
+              <Counter
+                value={counterValue}
+                step={1}
+                displayType="number"
+                onIncrement={setCounterValue}
+                onDecrement={setCounterValue}
+              />
+            </div>
+
+            {/* Counter Test - Currency Type */}
+            <div className="space-y-3">
+              <Counter
+                value={betValue}
+                step={100}
+                displayType="currency"
+                label="Bet Value"
+                onIncrement={setBetValue}
+                onDecrement={setBetValue}
+              />
+            </div>
+          </div>
         </div>
       </Modal>
       <div
@@ -138,7 +178,10 @@ export default function App() {
           <InfoButton {...componentStates.infoButton} />
         </div>
         <div style={componentStyles.settingsButton}>
-          <IconButton {...componentStates.settingsButton} />
+          <IconButton
+            {...componentStates.settingsButton}
+            onPress={() => setIsSettingsModalOpen(true)}
+          />
         </div>
         <div style={componentStyles.volumeButton}>
           <IconButton {...componentStates.volumeButton} />

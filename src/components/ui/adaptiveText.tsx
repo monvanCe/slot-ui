@@ -18,7 +18,7 @@ interface AdaptiveTextProps {
 const AdaptiveText: React.FC<AdaptiveTextProps> = ({
   children,
   className = '',
-  minFontSize = 8,
+  minFontSize = 1,
   maxFontSize = 100,
   justify = 'center',
   align = 'center',
