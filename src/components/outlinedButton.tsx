@@ -1,5 +1,5 @@
-import AdaptiveText from './adaptiveText';
-import DynamicSvg from './dynamicSvg';
+import AdaptiveText from './ui/adaptiveText';
+import DynamicSvg from './ui/dynamicSvg';
 
 export default function OutlinedButton({
   onPress,
@@ -13,13 +13,14 @@ export default function OutlinedButton({
   outlineSvgPath,
   outlineSvgFillColor,
   outlineSvgClassName,
+  disabled = false,
 }: IOutlinedButton) {
   return (
     <div
       className={`relative border-2 h-full w-full bg-${outlineColor} rounded-full p-[20%] ${
         onPress ? 'cursor-pointer' : ''
-      }`}
-      onClick={onPress}
+      } ${disabled ? 'opacity-50' : ''}`}
+      onClick={disabled ? undefined : onPress}
     >
       <div
         className={`h-full w-full bg-${bgColor} rounded-full flex items-center justify-center`}

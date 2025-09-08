@@ -9,14 +9,15 @@ export default function LabeledPriceButton({
   labelColor,
   value = 0,
   rightIconSvgPath,
+  disabled = false,
 }: ILabeledPriceButton) {
   return (
     <div
       className={`relative h-full w-full
          border-2 border-white pl-[10%] pr-[10%] py-[2%] rounded-full flex items-center ${
            onPress ? 'cursor-pointer' : ''
-         }  `}
-      onClick={onPress}
+         } ${disabled ? 'opacity-50' : ''}  `}
+      onClick={disabled ? undefined : onPress}
     >
       <div className="absolute bottom-[100%] left-[15%] w-6/12">
         {label && <LabelArea title={label} bgColor={labelColor} />}

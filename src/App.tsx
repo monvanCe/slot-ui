@@ -1,4 +1,4 @@
-import OutlinedButton from './components/ui/outlinedButton';
+import OutlinedButton from './components/outlinedButton';
 import LabeledPriceButton from './components/labeledPriceButton';
 import InfoButton from './components/infoButton';
 
@@ -17,7 +17,7 @@ import Choice from './components/ui/choice';
 
 export default function App() {
   const scale = useWindowScale();
-  const uiConfig = useAppSelector((state) => state.uiConfig);
+  const componentStyles = useAppSelector((state) => state.componentStyles);
   const [isAutoplayModalOpen, setIsAutoplayModalOpen] = useState(false);
   const [autoplayCount, setAutoplayCount] = useState(100);
   const [selectedSpinSpeed, setSelectedSpinSpeed] = useState('skip-screens');
@@ -29,7 +29,7 @@ export default function App() {
   ];
 
   useEffect(() => {
-    const curvedBarStyle = uiConfig.curvedBar;
+    const curvedBarStyle = componentStyles.curvedBar;
     //eslint-disable-next-line
     const { bottomByPixel } = calculatePixelPosition(curvedBarStyle);
 
@@ -38,7 +38,7 @@ export default function App() {
     //     .getElementById('pixi-container')
     //     ?.style.setProperty('bottom', `${bottomByPixel}px`);
     // }
-  }, [uiConfig]);
+  }, [componentStyles]);
 
   return (
     <>
@@ -104,16 +104,16 @@ export default function App() {
         <img
           src="/svg/Bottom_Bar.svg"
           alt="bottom"
-          style={uiConfig.curvedBar}
+          style={componentStyles.curvedBar}
         />
-        <div style={uiConfig.mobileBottom} />
-        <div style={uiConfig.mobileBetButton}>
+        <div style={componentStyles.mobileBottom} />
+        <div style={componentStyles.mobileBetButton}>
           <OutlinedButton
             iconSvgPath="svg/Bet_Icon.svg"
             iconSvgFillColor="white"
           />
         </div>
-        <div style={uiConfig.mobileAutoplayButton}>
+        <div style={componentStyles.mobileAutoplayButton}>
           <OutlinedButton
             iconSvgPath="svg/Popup_Arrow.svg"
             iconSvgFillColor={COLORS.background}
@@ -121,29 +121,29 @@ export default function App() {
             bgColor="orange"
           />
         </div>
-        <div style={uiConfig.infoButton}>
+        <div style={componentStyles.infoButton}>
           <InfoButton fillColor={COLORS.blue} />
         </div>
-        <div style={uiConfig.settingsButton}>
+        <div style={componentStyles.settingsButton}>
           <IconButton icon="material-symbols:settings-rounded" />
         </div>
-        <div style={uiConfig.volumeButton}>
+        <div style={componentStyles.volumeButton}>
           <IconButton icon="material-symbols:volume-up-rounded" />
         </div>
-        <div style={uiConfig.creditButton}>
+        <div style={componentStyles.creditButton}>
           <LabeledPriceButton
             label={'CREDIT'}
             labelColor="orange"
             value={10000}
           />
         </div>
-        <div style={uiConfig.middleSection}>
+        <div style={componentStyles.middleSection}>
           <DesktopMiddleSection />
         </div>
-        <div style={uiConfig.betButton}>
+        <div style={componentStyles.betButton}>
           <LabeledPriceButton label="BET" labelColor="green" value={10000} />
         </div>
-        <div style={uiConfig.autoplayButton}>
+        <div style={componentStyles.autoplayButton}>
           <SvgButton
             svgFilePath="svg/Autoplay_Button_Stroke.svg"
             fillColor="transparent"
@@ -155,7 +155,7 @@ export default function App() {
             </AdaptiveText>
           </SvgButton>
         </div>
-        <div style={uiConfig.spinButton}>
+        <div style={componentStyles.spinButton}>
           <OutlinedButton
             outlineSvgPath="svg/Spin_Button_Icon.svg"
             outlineSvgFillColor="white"

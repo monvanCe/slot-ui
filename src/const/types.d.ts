@@ -14,13 +14,15 @@ interface ILabelArea {
 
 interface IIconButton {
   icon: string;
-  onClick?: () => void;
+  onPress?: () => void;
   color?: string;
+  disabled?: boolean;
 }
 
 interface IInfoButton {
   onPress?: () => void;
   fillColor: string;
+  disabled?: boolean;
 }
 
 interface ISvgButton {
@@ -28,6 +30,7 @@ interface ISvgButton {
   fillColor: string;
   onPress?: () => void;
   children?: React.ReactNode;
+  disabled?: boolean;
 }
 
 type TLabeledPriceButtonLabel =
@@ -44,6 +47,7 @@ type ILabeledPriceButton = TLabeledPriceButtonLabel & {
   onPress?: () => void;
   value?: number;
   rightIconSvgPath?: string;
+  disabled?: boolean;
 };
 
 type TOutlinedButtonSpan =
@@ -78,6 +82,7 @@ type IOutlinedButton = TOutlinedButtonSpan &
     outlineColor?: TColors;
     bgColor?: TColors;
     color?: TColors;
+    disabled?: boolean;
   };
 
 interface IUIConfig {

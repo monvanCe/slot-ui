@@ -1,10 +1,10 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import appConfigSlice from './appConfigSlice';
-import uiConfigSlice from './uiConfigSlice';
+import componentStylesSlice from './componentStyles';
 
 const rootReducer = combineReducers({
   appConfig: appConfigSlice.reducer,
-  uiConfig: uiConfigSlice.reducer,
+  componentStyles: componentStylesSlice.reducer,
 });
 
 export default rootReducer;
