@@ -14,6 +14,7 @@ import { calculatePixelPosition } from './utils/calculatePixelPosition';
 import Modal from './components/ui/modal';
 import Slider from './components/ui/slider';
 import Choice from './components/ui/choice';
+import { COMPONENT_STATES } from './const/componentStates';
 
 export default function App() {
   const scale = useWindowScale();
@@ -42,7 +43,6 @@ export default function App() {
 
   return (
     <>
-      {/* burda */}
       {/* Autoplay Modal */}
       <Modal
         isOpen={isAutoplayModalOpen}
@@ -108,32 +108,23 @@ export default function App() {
         />
         <div style={componentStyles.mobileBottom} />
         <div style={componentStyles.mobileBetButton}>
-          <OutlinedButton
-            iconSvgPath="svg/Bet_Icon.svg"
-            iconSvgFillColor="white"
-          />
+          <OutlinedButton {...COMPONENT_STATES.mobileBetButton.default!} />
         </div>
         <div style={componentStyles.mobileAutoplayButton}>
-          <OutlinedButton
-            iconSvgPath="svg/Popup_Arrow.svg"
-            iconSvgFillColor={COLORS.background}
-            iconSvgClassName="cls-2"
-            bgColor="orange"
-          />
+          <OutlinedButton {...COMPONENT_STATES.mobileAutoplayButton.default!} />
         </div>
         <div style={componentStyles.infoButton}>
-          <InfoButton fillColor={COLORS.blue} />
+          <InfoButton {...COMPONENT_STATES.infoButton.active!} />
         </div>
         <div style={componentStyles.settingsButton}>
-          <IconButton icon="material-symbols:settings-rounded" />
+          <IconButton {...COMPONENT_STATES.settingsButton.active!} />
         </div>
         <div style={componentStyles.volumeButton}>
-          <IconButton icon="material-symbols:volume-up-rounded" />
+          <IconButton {...COMPONENT_STATES.volumeButton.active!} />
         </div>
         <div style={componentStyles.creditButton}>
           <LabeledPriceButton
-            label={'CREDIT'}
-            labelColor="orange"
+            {...COMPONENT_STATES.creditButton.default!}
             value={10000}
           />
         </div>
@@ -141,13 +132,14 @@ export default function App() {
           <DesktopMiddleSection />
         </div>
         <div style={componentStyles.betButton}>
-          <LabeledPriceButton label="BET" labelColor="green" value={10000} />
+          <LabeledPriceButton
+            {...COMPONENT_STATES.betButton.pressable!}
+            value={10000}
+            onPress={() => {}}
+          />
         </div>
         <div style={componentStyles.autoplayButton}>
-          <SvgButton
-            svgFilePath="svg/Autoplay_Button_Stroke.svg"
-            fillColor="transparent"
-          >
+          <SvgButton {...COMPONENT_STATES.autoplayButton.spinning!}>
             <AdaptiveText>
               <span className="text-white font-bold leading-none text-center text-xl">
                 AUTO <br /> PLAY
@@ -157,9 +149,7 @@ export default function App() {
         </div>
         <div style={componentStyles.spinButton}>
           <OutlinedButton
-            outlineSvgPath="svg/Spin_Button_Icon.svg"
-            outlineSvgFillColor="white"
-            label="SPIN"
+            {...COMPONENT_STATES.spinButton.spinning!}
             onPress={() => setIsAutoplayModalOpen(true)}
           />
         </div>

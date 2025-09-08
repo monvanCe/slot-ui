@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { uiConfig } from '../../const/uiConfigs';
 
-const initialState: IUIConfig = { ...uiConfig.mobile };
+const initialState: IUIConfig = { ...uiConfig.desktop };
 
 const componentStylesSlice = createSlice({
   name: 'componentStyles',

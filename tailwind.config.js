@@ -6,10 +6,12 @@ module.exports = {
     'bg-blue',
     'bg-green',
     'bg-orange',
+    'bg-red',
     'text-background',
     'text-blue',
     'text-green',
     'text-orange',
+    'text-red',
   ],
   theme: {
     extend: {
@@ -21,6 +23,7 @@ module.exports = {
         blue: 'rgb(var(--color-blue-rgb))',
         green: 'rgb(var(--color-green-rgb))',
         orange: 'rgb(var(--color-orange-rgb))',
+        red: 'rgb(var(--color-red-rgb))',
       },
     },
   },

@@ -1,7 +1,26 @@
-type TColors = 'background' | 'blue' | 'green' | 'orange' | 'white' | 'black';
+type TColors =
+  | 'background'
+  | 'blue'
+  | 'green'
+  | 'orange'
+  | 'white'
+  | 'black'
+  | 'red';
+type TButtonStates =
+  | 'default'
+  | 'pressable'
+  | 'active'
+  | 'spinning'
+  | 'passive';
+type TFillColor =
+  | `#${string}`
+  | `rgb(${number},${number},${number})`
+  | `rgba(${number},${number},${number},${number})`
+  | 'transparent'
+  | 'currentColor';
 
 interface IDynamicSvgProps {
-  fillColor: string;
+  fillColor: TFillColor;
   svgFilePath: string;
   className?: string;
 }
@@ -21,13 +40,13 @@ interface IIconButton {
 
 interface IInfoButton {
   onPress?: () => void;
-  fillColor: string;
+  fillColor: TFillColor;
   disabled?: boolean;
 }
 
 interface ISvgButton {
   svgFilePath: string;
-  fillColor: string;
+  fillColor: TFillColor;
   onPress?: () => void;
   children?: React.ReactNode;
   disabled?: boolean;
@@ -43,12 +62,24 @@ type TLabeledPriceButtonLabel =
       labelColor?: undefined;
     };
 
-type ILabeledPriceButton = TLabeledPriceButtonLabel & {
-  onPress?: () => void;
-  value?: number;
-  rightIconSvgPath?: string;
-  disabled?: boolean;
-};
+type TLabeledPriceButtonRightIcon =
+  | {
+      rightIconSvgPath: string;
+      rightIconBgColor: string;
+      rightIconSvgFillColor: TFillColor;
+    }
+  | {
+      rightIconSvgPath?: undefined;
+      rightIconBgColor?: undefined;
+      rightIconSvgFillColor?: undefined;
+    };
+
+type ILabeledPriceButton = TLabeledPriceButtonLabel &
+  TLabeledPriceButtonRightIcon & {
+    onPress?: () => void;
+    value?: number;
+    disabled?: boolean;
+  };
 
 type TOutlinedButtonSpan =
   | {
@@ -60,7 +91,7 @@ type TOutlinedButtonSpan =
   | {
       label?: undefined;
       iconSvgPath: string;
-      iconSvgFillColor: string;
+      iconSvgFillColor: TFillColor;
       iconSvgClassName?: string;
     };
 
@@ -72,7 +103,7 @@ type TOutlinedButtonOutline =
     }
   | {
       outlineSvgPath: string;
-      outlineSvgFillColor: string;
+      outlineSvgFillColor: TFillColor;
       outlineSvgClassName?: string;
     };
 

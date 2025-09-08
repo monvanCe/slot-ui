@@ -1,5 +1,4 @@
 import DynamicSvg from './ui/dynamicSvg';
-import { COLORS } from '../utils/colors';
 import LabelArea from './ui/labelArea';
 import AdaptiveText from './ui/adaptiveText';
 
@@ -10,6 +9,8 @@ export default function LabeledPriceButton({
   value = 0,
   rightIconSvgPath,
   disabled = false,
+  rightIconBgColor,
+  rightIconSvgFillColor,
 }: ILabeledPriceButton) {
   return (
     <div
@@ -28,9 +29,11 @@ export default function LabeledPriceButton({
         </AdaptiveText>
       </div>
       {rightIconSvgPath && (
-        <div className="absolute p-1 h-[75%] aspect-square -right-4 top-1/2 -translate-y-1/2 bg-white rounded-full flex items-center justify-center">
+        <div
+          className={`absolute p-1.5 h-[75%] aspect-square -right-4 top-1/2 -translate-y-1/2 bg-${rightIconBgColor} rounded-full flex items-center justify-center`}
+        >
           <DynamicSvg
-            fillColor={COLORS.background}
+            fillColor={rightIconSvgFillColor}
             svgFilePath={rightIconSvgPath}
           />
         </div>
