@@ -33,7 +33,7 @@ export default function Modal({ isOpen, onClose, children, title }: IModal) {
 
       {/* Modal Content */}
       <div
-        className="relative rounded-lg shadow-2xl max-w-md w-full mx-4 p-6 border-2 border-white"
+        className="relative rounded-lg shadow-2xl max-w-4xl w-full mx-4 p-6 border-2 border-white"
         style={{ backgroundColor: COLORS.background }}
       >
         {/* Header */}

@@ -169,3 +169,11 @@ interface ICounter {
   onDecrement: (newValue: number) => void;
   className?: string;
 }
+
+interface ISwitch {
+  label: string;
+  description: string;
+  value: boolean;
+  onChange: (value: boolean) => void;
+  className?: string;
+}
