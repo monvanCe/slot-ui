@@ -8,17 +8,23 @@ import SvgButton from './components/ui/svgButton';
 import DesktopMiddleSection from './components/desktopMiddleSection';
 import AdaptiveText from './components/ui/adaptiveText';
 import { useWindowScale } from './hooks/useWindowScale';
-import { useAppSelector } from './store/store';
+import { useAppSelector, useAppDispatch } from './store/store';
 import { useEffect, useState } from 'react';
 import { calculatePixelPosition } from './utils/calculatePixelPosition';
 import Modal from './components/ui/modal';
 import Slider from './components/ui/slider';
 import Choice from './components/ui/choice';
+import {
+  setSpinButtonState,
+  setAutoplayButtonState,
+} from './store/slices/componentStatesSlice';
 import { COMPONENT_STATES } from './const/componentStates';
 
 export default function App() {
   const scale = useWindowScale();
+  const dispatch = useAppDispatch();
   const componentStyles = useAppSelector((state) => state.componentStyles);
+  const componentStates = useAppSelector((state) => state.componentStates);
   const [isAutoplayModalOpen, setIsAutoplayModalOpen] = useState(false);
   const [autoplayCount, setAutoplayCount] = useState(100);
   const [selectedSpinSpeed, setSelectedSpinSpeed] = useState('skip-screens');
@@ -28,6 +34,21 @@ export default function App() {
     { id: 'quick-spin', label: 'QUICK SPIN' },
     { id: 'skip-screens', label: 'SKIP SCREENS' },
   ];
+
+  const handleSpinButtonPress = () => {
+    // Spin button state'ini değiştir
+    if (componentStates.spinButton.label === 'SPIN') {
+      dispatch(setSpinButtonState(COMPONENT_STATES.spinButton.spinning!));
+      dispatch(
+        setAutoplayButtonState(COMPONENT_STATES.autoplayButton.spinning!)
+      );
+    } else {
+      dispatch(setSpinButtonState(COMPONENT_STATES.spinButton.default!));
+      dispatch(
+        setAutoplayButtonState(COMPONENT_STATES.autoplayButton.default!)
+      );
+    }
+  };
 
   useEffect(() => {
     const curvedBarStyle = componentStyles.curvedBar;
@@ -108,38 +129,35 @@ export default function App() {
         />
         <div style={componentStyles.mobileBottom} />
         <div style={componentStyles.mobileBetButton}>
-          <OutlinedButton {...COMPONENT_STATES.mobileBetButton.default!} />
+          <OutlinedButton {...componentStates.mobileBetButton} />
         </div>
         <div style={componentStyles.mobileAutoplayButton}>
-          <OutlinedButton {...COMPONENT_STATES.mobileAutoplayButton.default!} />
+          <OutlinedButton {...componentStates.mobileAutoplayButton} />
         </div>
         <div style={componentStyles.infoButton}>
-          <InfoButton {...COMPONENT_STATES.infoButton.active!} />
+          <InfoButton {...componentStates.infoButton} />
         </div>
         <div style={componentStyles.settingsButton}>
-          <IconButton {...COMPONENT_STATES.settingsButton.active!} />
+          <IconButton {...componentStates.settingsButton} />
         </div>
         <div style={componentStyles.volumeButton}>
-          <IconButton {...COMPONENT_STATES.volumeButton.active!} />
+          <IconButton {...componentStates.volumeButton} />
         </div>
         <div style={componentStyles.creditButton}>
-          <LabeledPriceButton
-            {...COMPONENT_STATES.creditButton.default!}
-            value={10000}
-          />
+          <LabeledPriceButton {...componentStates.creditButton} value={10000} />
         </div>
         <div style={componentStyles.middleSection}>
           <DesktopMiddleSection />
         </div>
         <div style={componentStyles.betButton}>
           <LabeledPriceButton
-            {...COMPONENT_STATES.betButton.pressable!}
+            {...componentStates.betButton}
             value={10000}
             onPress={() => {}}
           />
         </div>
         <div style={componentStyles.autoplayButton}>
-          <SvgButton {...COMPONENT_STATES.autoplayButton.spinning!}>
+          <SvgButton {...componentStates.autoplayButton}>
             <AdaptiveText>
               <span className="text-white font-bold leading-none text-center text-xl">
                 AUTO <br /> PLAY
@@ -149,8 +167,8 @@ export default function App() {
         </div>
         <div style={componentStyles.spinButton}>
           <OutlinedButton
-            {...COMPONENT_STATES.spinButton.spinning!}
-            onPress={() => setIsAutoplayModalOpen(true)}
+            {...componentStates.spinButton}
+            onPress={handleSpinButtonPress}
           />
         </div>
       </div>
