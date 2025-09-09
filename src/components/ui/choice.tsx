@@ -43,7 +43,7 @@ export default function Choice({
                 <DynamicSvg
                   fillColor="#ffffff"
                   svgFilePath="/svg/Confirm_Icon.svg"
-                  className="w-3 h-3"
+                  targetCssClass="w-3 h-3"
                 />
               )}
             </div>

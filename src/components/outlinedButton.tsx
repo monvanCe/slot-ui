@@ -30,7 +30,7 @@ export default function OutlinedButton({
             <DynamicSvg
               svgFilePath={iconSvgPath}
               fillColor={iconSvgFillColor}
-              className={iconSvgClassName}
+              targetCssClass={iconSvgClassName}
             />
           </div>
         )}
@@ -47,7 +47,7 @@ export default function OutlinedButton({
           <DynamicSvg
             svgFilePath={outlineSvgPath}
             fillColor={outlineSvgFillColor}
-            className={outlineSvgClassName}
+            targetCssClass={outlineSvgClassName}
           />
         </div>
       )}

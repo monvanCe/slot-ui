@@ -3,25 +3,10 @@ import { useEffect, useState } from 'react';
 export default function DynamicSvg({
   fillColor,
   svgFilePath,
-  className,
+  targetCssClass = 'cls-1',
+  propertyName = 'fill',
 }: IDynamicSvgProps) {
   const [svgContent, setSvgContent] = useState<string>('');
-
-  const regexByClassName = (className: string | undefined) => {
-    switch (className) {
-      case 'cls-1':
-        return /(\.cls-1\s*\{[^}]*fill:\s*)[^;]+;/g;
-
-      case 'st0':
-        return /(\.st0\s*\{[^}]*fill:\s*)[^;]+;/g;
-
-      case 'cls-2':
-        return /(\.cls-2\s*\{[^}]*fill:\s*)[^;]+;/g;
-
-      default:
-        return /(\.cls-1\s*\{[^}]*fill:\s*)[^;]+;/g;
-    }
-  };
 
   useEffect(() => {
     const loadSvg = async () => {
@@ -29,10 +14,20 @@ export default function DynamicSvg({
         const response = await fetch(svgFilePath);
         let svgText = await response.text();
 
-        svgText = svgText.replace(
-          regexByClassName(className),
-          `$1${fillColor};`
+        const escapedProperty = propertyName.replace(
+          /[.*+?^${}()|[\]\\]/g,
+          '\\$&'
         );
+        const escapedTargetClass = targetCssClass.replace(
+          /[.*+?^${}()|[\]\\]/g,
+          '\\$&'
+        );
+        const regex = new RegExp(
+          `(\\.${escapedTargetClass}\\s*\\{[^}]*${escapedProperty}:\\s*)[^;]+;`,
+          'g'
+        );
+
+        svgText = svgText.replace(regex, `$1${fillColor};`);
 
         setSvgContent(svgText);
       } catch (error) {
@@ -43,7 +38,7 @@ export default function DynamicSvg({
     if (svgFilePath) {
       loadSvg();
     }
-  }, [svgFilePath, fillColor, className]);
+  }, [svgFilePath, fillColor, targetCssClass, propertyName]);
 
   if (!svgContent) {
     return (

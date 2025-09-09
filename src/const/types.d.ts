@@ -43,9 +43,10 @@ type TElementType =
   | autoplayButton;
 
 interface IDynamicSvgProps {
-  fillColor: TFillColor;
+  fillColor: TSvgFillColor;
   svgFilePath: string;
-  className?: string;
+  targetCssClass?: string;
+  propertyName?: string;
 }
 
 interface ILabelArea {

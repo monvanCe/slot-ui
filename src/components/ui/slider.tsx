@@ -118,7 +118,7 @@ export default function Slider({
           <DynamicSvg
             fillColor="#ffffff"
             svgFilePath="/svg/Slider_Icon.svg"
-            className="w-3 h-4 pointer-events-none"
+            targetCssClass="w-3 h-4 pointer-events-none"
           />
         </div>
       </div>

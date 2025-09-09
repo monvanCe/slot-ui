@@ -65,7 +65,7 @@ const Counter: React.FC<ICounter> = ({
           <DynamicSvg
             svgFilePath="/svg/Plus_Icon.svg"
             fillColor={COLORS.background}
-            className="w-4 h-4"
+            targetCssClass="w-4 h-4"
           />
         </button>
       </div>

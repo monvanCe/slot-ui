@@ -53,9 +53,9 @@ export default function Switch({
               }`}
             >
               <DynamicSvg
-                fillColor={value ? COLORS.white : COLORS.background}
+                fillColor={value ? '#fff' : COLORS.background}
                 svgFilePath="/svg/Slider_Icon.svg"
-                className="st0"
+                propertyName="stroke"
               />
             </div>
           </div>
