@@ -18,7 +18,7 @@ export default function OutlinedButton({
   return (
     <div
       className={`relative border-2 h-full w-full bg-${outlineColor} rounded-full p-[20%] ${
-        onPress ? 'cursor-pointer' : ''
+        onPress && !disabled ? 'cursor-pointer' : ''
       } ${disabled ? 'opacity-50' : ''}`}
       onClick={disabled ? undefined : onPress}
     >

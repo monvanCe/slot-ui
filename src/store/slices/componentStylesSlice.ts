@@ -1,13 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { uiConfig } from '../../const/uiConfigs';
 
-const initialState: IUIConfig = { ...uiConfig.desktop };
+const initialState: IComponentStylesSlice = { ...uiConfig.desktop };
 
 const componentStylesSlice = createSlice({
   name: 'componentStyles',
   initialState,
   reducers: {
-    setComponentStyles: (state, action: PayloadAction<IUIConfig>) => {
+    setComponentStyles: (
+      state,
+      action: PayloadAction<IComponentStylesSlice>
+    ) => {
       return { ...state, ...action.payload };
     },
   },

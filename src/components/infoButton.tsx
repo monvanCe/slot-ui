@@ -7,9 +7,9 @@ export default function InfoButton({
 }: IInfoButton) {
   return (
     <div
-      className={`relative h-full w-full cursor-pointer ${
-        disabled ? 'opacity-50' : ''
-      }`}
+      className={`relative h-full w-full ${
+        onPress && !disabled ? 'cursor-pointer' : ''
+      } ${disabled ? 'opacity-50' : ''}`}
       onClick={disabled ? undefined : onPress}
     >
       <DynamicSvg svgFilePath="svg/Info_Button.svg" fillColor={fillColor} />

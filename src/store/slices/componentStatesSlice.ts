@@ -1,20 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { COMPONENT_STATES } from '../../const/componentStates';
 
-interface ComponentStatesState {
-  mobileBetButton: IOutlinedButton;
-  mobileAutoplayButton: IOutlinedButton;
-  spinButton: IOutlinedButton;
-  infoButton: IInfoButton;
-  settingsButton: IIconButton;
-  volumeButton: IIconButton;
-  creditButton: ILabeledPriceButton;
-  betButton: ILabeledPriceButton;
-  autoplayButton: ISvgButton;
-}
+const addVariantToState = (state: TElementType, variant: TButtonVariants) => {
+  return { ...state, variant };
+};
 
-const initialState: ComponentStatesState = {
-  mobileBetButton: COMPONENT_STATES.mobileBetButton.default!,
+const initialState: IComponentStatesSlice = {
+  mobileBetButton: addVariantToState(
+    COMPONENT_STATES.mobileBetButton.default!,
+    'default'
+  ),
   mobileAutoplayButton: COMPONENT_STATES.mobileAutoplayButton.default!,
   spinButton: COMPONENT_STATES.spinButton.default!,
   infoButton: COMPONENT_STATES.infoButton.default!,

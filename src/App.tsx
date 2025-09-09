@@ -7,39 +7,24 @@ import SvgButton from './components/ui/svgButton';
 import DesktopMiddleSection from './components/desktopMiddleSection';
 import AdaptiveText from './components/ui/adaptiveText';
 import { useWindowScale } from './hooks/useWindowScale';
-import { useAppSelector, useAppDispatch } from './store/store';
+import { useAppSelector } from './store/store';
 import { useEffect, useState } from 'react';
 import { calculatePixelPosition } from './utils/calculatePixelPosition';
 import ExampleModal from './components/exampleModal';
+
 import {
-  setSpinButtonState,
-  setAutoplayButtonState,
-} from './store/slices/componentStatesSlice';
-import { COMPONENT_STATES } from './const/componentStates';
+  setComponentState,
+  setComponentStateByVariant,
+} from './utils/componentStateManager';
 
 export default function App() {
   const scale = useWindowScale();
-  const dispatch = useAppDispatch();
   const componentStyles = useAppSelector((state) => state.componentStyles);
   const componentStates = useAppSelector((state) => state.componentStates);
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
 
-  const handleSpinButtonPress = () => {
-    // Spin button state'ini değiştir
-    if (componentStates.spinButton.label === 'SPIN') {
-      dispatch(setSpinButtonState(COMPONENT_STATES.spinButton.spinning!));
-      dispatch(
-        setAutoplayButtonState(COMPONENT_STATES.autoplayButton.spinning!)
-      );
-    } else {
-      dispatch(setSpinButtonState(COMPONENT_STATES.spinButton.default!));
-      dispatch(
-        setAutoplayButtonState(COMPONENT_STATES.autoplayButton.default!)
-      );
-    }
-  };
-
   useEffect(() => {
+    // bu kısım piksel hesaplanması için örnek konmuştur. lazım olduğunda pixi tarafına iletilecek
     const curvedBarStyle = componentStyles.curvedBar;
     //eslint-disable-next-line
     const { bottomByPixel } = calculatePixelPosition(curvedBarStyle);
@@ -56,7 +41,10 @@ export default function App() {
       {/* Settings Modal */}
       <ExampleModal
         isOpen={isSettingsModalOpen}
-        onClose={() => setIsSettingsModalOpen(false)}
+        onClose={() => {
+          setIsSettingsModalOpen(false);
+          setComponentStateByVariant('settingsButton', 'default');
+        }}
       />
       <div
         style={{
@@ -85,7 +73,10 @@ export default function App() {
         <div style={componentStyles.settingsButton}>
           <IconButton
             {...componentStates.settingsButton}
-            onPress={() => setIsSettingsModalOpen(true)}
+            onPress={() => {
+              setIsSettingsModalOpen(true);
+              setComponentStateByVariant('settingsButton', 'active');
+            }}
           />
         </div>
         <div style={componentStyles.volumeButton}>
@@ -116,7 +107,15 @@ export default function App() {
         <div style={componentStyles.spinButton}>
           <OutlinedButton
             {...componentStates.spinButton}
-            onPress={handleSpinButtonPress}
+            onPress={() => {
+              if (componentStates.spinButton.label === 'SPIN') {
+                setComponentState('spinButton', 'spinning');
+                setComponentState('autoplayButton', 'spinning');
+              } else {
+                setComponentState('spinButton', 'default');
+                setComponentState('autoplayButton', 'default');
+              }
+            }}
           />
         </div>
       </div>

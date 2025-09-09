@@ -1,15 +1,15 @@
 import { COLORS } from '../utils/colors';
 
 export const COMPONENT_STATES: {
-  mobileBetButton: { [key in TButtonStates]?: IOutlinedButton };
-  mobileAutoplayButton: { [key in TButtonStates]?: IOutlinedButton };
-  spinButton: { [key in TButtonStates]?: IOutlinedButton };
-  infoButton: { [key in TButtonStates]?: IInfoButton };
-  settingsButton: { [key in TButtonStates]?: IIconButton };
-  volumeButton: { [key in TButtonStates]?: IIconButton };
-  creditButton: { [key in TButtonStates]?: ILabeledPriceButton };
-  betButton: { [key in TButtonStates]?: ILabeledPriceButton };
-  autoplayButton: { [key in TButtonStates]?: ISvgButton };
+  mobileBetButton: { [key in TButtonVariants]?: IOutlinedButton };
+  mobileAutoplayButton: { [key in TButtonVariants]?: IOutlinedButton };
+  spinButton: { [key in TButtonVariants]?: IOutlinedButton };
+  infoButton: { [key in TButtonVariants]?: IInfoButton };
+  settingsButton: { [key in TButtonVariants]?: IIconButton };
+  volumeButton: { [key in TButtonVariants]?: IIconButton };
+  creditButton: { [key in TButtonVariants]?: ILabeledPriceButton };
+  betButton: { [key in TButtonVariants]?: ILabeledPriceButton };
+  autoplayButton: { [key in TButtonVariants]?: ISvgButton };
 } = {
   mobileBetButton: {
     default: {
@@ -87,12 +87,19 @@ export const COMPONENT_STATES: {
       label: 'BET',
       labelColor: 'green' as TColors,
     },
-    pressable: {
+    active: {
       label: 'BET',
       labelColor: 'green' as TColors,
       rightIconBgColor: 'green' as TColors,
       rightIconSvgPath: 'svg/Bet_Icon.svg',
       rightIconSvgFillColor: '#fff',
+    },
+    pressable: {
+      label: 'BET',
+      labelColor: 'green' as TColors,
+      rightIconBgColor: 'white' as TColors,
+      rightIconSvgPath: 'svg/Bet_Icon.svg',
+      rightIconSvgFillColor: COLORS.background,
     },
   },
 

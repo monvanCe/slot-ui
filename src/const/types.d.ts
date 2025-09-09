@@ -6,18 +6,41 @@ type TColors =
   | 'white'
   | 'black'
   | 'red';
-type TButtonStates =
+type TButtonVariants =
   | 'default'
   | 'pressable'
   | 'active'
   | 'spinning'
   | 'passive';
-type TFillColor =
+type TSvgFillColor =
   | `#${string}`
   | `rgb(${number},${number},${number})`
   | `rgba(${number},${number},${number},${number})`
   | 'transparent'
   | 'currentColor';
+
+interface IComponentStatesSlice {
+  mobileBetButton: IOutlinedButton;
+  mobileAutoplayButton: IOutlinedButton;
+  spinButton: IOutlinedButton;
+  infoButton: IInfoButton;
+  settingsButton: IIconButton;
+  volumeButton: IIconButton;
+  creditButton: ILabeledPriceButton;
+  betButton: ILabeledPriceButton;
+  autoplayButton: ISvgButton;
+}
+
+type TElementType =
+  | mobileBetButton
+  | mobileAutoplayButton
+  | spinButton
+  | infoButton
+  | settingsButton
+  | volumeButton
+  | creditButton
+  | betButton
+  | autoplayButton;
 
 interface IDynamicSvgProps {
   fillColor: TFillColor;
@@ -116,7 +139,7 @@ type IOutlinedButton = TOutlinedButtonSpan &
     disabled?: boolean;
   };
 
-interface IUIConfig {
+interface IComponentStylesSlice {
   curvedBar: React.CSSProperties;
   infoButton: React.CSSProperties;
   settingsButton: React.CSSProperties;

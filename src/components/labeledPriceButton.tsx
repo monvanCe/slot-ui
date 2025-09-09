@@ -16,7 +16,7 @@ export default function LabeledPriceButton({
     <div
       className={`relative h-full w-full
          border-2 border-white pl-[10%] pr-[10%] py-[2%] rounded-full flex items-center ${
-           onPress ? 'cursor-pointer' : ''
+           onPress && !disabled ? 'cursor-pointer' : ''
          } ${disabled ? 'opacity-50' : ''}  `}
       onClick={disabled ? undefined : onPress}
     >

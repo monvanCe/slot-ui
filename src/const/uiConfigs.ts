@@ -1,6 +1,9 @@
 import { COLORS } from '../utils/colors';
 
-export const uiConfig: { desktop: IUIConfig; mobile: IUIConfig } = {
+export const uiConfig: {
+  desktop: IComponentStylesSlice;
+  mobile: IComponentStylesSlice;
+} = {
   desktop: {
     curvedBar: {
       position: 'absolute',

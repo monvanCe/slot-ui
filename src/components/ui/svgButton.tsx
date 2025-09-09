@@ -9,9 +9,9 @@ export default function SvgButton({
 }: ISvgButton) {
   return (
     <div
-      className={`relative h-full ${onPress ? 'cursor-pointer' : ''} ${
-        disabled ? 'opacity-50' : ''
-      }`}
+      className={`relative h-full ${
+        onPress && !disabled ? 'cursor-pointer' : ''
+      } ${disabled ? 'opacity-50' : ''}`}
       onClick={disabled ? undefined : onPress}
     >
       <DynamicSvg svgFilePath={svgFilePath} fillColor={fillColor} />

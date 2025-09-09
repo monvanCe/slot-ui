@@ -21,18 +21,18 @@ export function getColorFromCSS(propertyName: string): string {
     .padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
 }
 
-export const COLORS: { [key in TColors]: TFillColor } = {
-  background: getColorFromCSS('--color-background-rgb') as TFillColor,
+export const COLORS: { [key in TColors]: TSvgFillColor } = {
+  background: getColorFromCSS('--color-background-rgb') as TSvgFillColor,
 
-  blue: getColorFromCSS('--color-blue-rgb') as TFillColor,
+  blue: getColorFromCSS('--color-blue-rgb') as TSvgFillColor,
 
-  green: getColorFromCSS('--color-green-rgb') as TFillColor,
+  green: getColorFromCSS('--color-green-rgb') as TSvgFillColor,
 
-  orange: getColorFromCSS('--color-orange-rgb') as TFillColor,
+  orange: getColorFromCSS('--color-orange-rgb') as TSvgFillColor,
 
-  red: getColorFromCSS('--color-red-rgb') as TFillColor,
+  red: getColorFromCSS('--color-red-rgb') as TSvgFillColor,
 
-  white: getColorFromCSS('white') as TFillColor,
+  white: getColorFromCSS('white') as TSvgFillColor,
 
-  black: getColorFromCSS('black') as TFillColor,
+  black: getColorFromCSS('black') as TSvgFillColor,
 } as const;
